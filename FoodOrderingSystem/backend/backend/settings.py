@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',  # to handle CORS to communicate between frontend and backend
 ]
 
-# CORS_ALLOWED_ALL_ORIGINS = True # to allow all origins for development purpose
+# CORS_ALLOW_ALL_ORIGINS = True # to allow all origins for development purpose
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # React development server
