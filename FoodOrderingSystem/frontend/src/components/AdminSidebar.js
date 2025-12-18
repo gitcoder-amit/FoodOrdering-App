@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import '../styles/sidebar.css'
 import { Link } from 'react-router-dom';
-import { FaThLarge, FaUsers, FaSearch, FaEdit } from 'react-icons/fa';
+import { FaThLarge, FaUsers, FaSearch, FaEdit, FaChevronUp, FaChevronDown, FaList, FaFile, FaStar, FaCommentAlt } from 'react-icons/fa';
 import '../styles/admin.css'
 
 const AdminSidebar = () => {
@@ -32,7 +32,7 @@ const AdminSidebar = () => {
 
             <div className ='list-group list-group-flush'>
                 <button onClick = {()=>toggleMenu('category')} className = 'list-group-item list-group-item-action bg-dark text-white '>
-                <FaEdit/> Food Category
+                <FaEdit/> Food Category {openMenus.category ? <FaChevronUp/> : <FaChevronDown/>}
                 </button>
             </div>
 
@@ -46,7 +46,7 @@ const AdminSidebar = () => {
 
             <div className ='list-group list-group-flush'>
                 <button onClick = {()=>toggleMenu('food')} className = 'list-group-item list-group-item-action bg-dark text-white '>
-                <FaEdit/> Food Item
+                <FaEdit/> Food Item {openMenus.food ? <FaChevronUp/> : <FaChevronDown/>}
                 </button>
             </div>
             
@@ -60,11 +60,40 @@ const AdminSidebar = () => {
 
 
             <div className ='list-group list-group-flush'>
+                <button onClick = {()=>toggleMenu('orders')} className = 'list-group-item list-group-item-action bg-dark text-white '>
+                <FaList/> Orders {openMenus.orders ? <FaChevronUp/> : <FaChevronDown/>}
+                </button>
+            </div>
+            
+            {openMenus.orders && (
+            <div className ='ps-4'>
+                <Link className = 'list-group-item list-group-item-action bg-dark text-white '>Not Confirmed</Link>
+
+                <Link className = 'list-group-item list-group-item-action bg-dark text-white '>Confirmed</Link>
+
+                <Link className = 'list-group-item list-group-item-action bg-dark text-white '>Being Prepared</Link>
+
+                <Link className = 'list-group-item list-group-item-action bg-dark text-white '>Food Pickup</Link>
+
+                <Link className = 'list-group-item list-group-item-action bg-dark text-white '>Delievered</Link>
+
+                <Link className = 'list-group-item list-group-item-action bg-dark text-white '>Cancelled</Link>
+
+                <Link className = 'list-group-item list-group-item-action bg-dark text-white '>All Orders</Link>
+            </div>
+            )}
+
+
+            <div className ='list-group list-group-flush'>
+                <Link className = 'list-group-item list-group-item-action bg-dark text-white '><FaFile className = 'me-2 icon-fix'/>B/w Date Reports</Link>
+            </div>
+
+            <div className ='list-group list-group-flush'>
                 <Link className = 'list-group-item list-group-item-action bg-dark text-white '><FaSearch className = 'me-2 icon-fix'/>Search</Link>
             </div>
 
             <div className ='list-group list-group-flush'>
-                <Link className = 'list-group-item list-group-item-action bg-dark text-white'><FaThLarge className = 'me-2 icon-fix'/>Review Users</Link>
+                <Link className = 'list-group-item list-group-item-action bg-dark text-white'><FaCommentAlt className = 'me-2 icon-fix'/>Review Users</Link>
             </div>
         </div>
 

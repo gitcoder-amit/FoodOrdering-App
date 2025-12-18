@@ -2,3 +2,7 @@
     position: relative;
     top: -3px
 }
+
+#page-content-wrapper{
+    margin-left: 250px;
+}

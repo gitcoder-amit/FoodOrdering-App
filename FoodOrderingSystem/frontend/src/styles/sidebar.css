@@ -1,9 +1,8 @@
 .sidebar{
     width: 250px;
-    height: 100vh;
-    position: fixed; /* Fix the sidebar position other part will move*/
+    /* position: fixed; 
     top: 0;
-    left: 0;
+    left: 0; */
 }
 
 .list-group-item:hover{
