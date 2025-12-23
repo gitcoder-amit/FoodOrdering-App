@@ -19,7 +19,7 @@ class Category(models.Model):
     creation_at = models.DateTimeField(auto_now_add = True)
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.category_name}"
 
 
 class Food(models.Model):
@@ -27,7 +27,7 @@ class Food(models.Model):
     item_name = models.CharField(max_length=50, null=True)
     item_price = models.DecimalField(max_digits= 10, decimal_places=2)
     item_description = models.TextField(max_length=500,null = True, blank=True)
-    image = models.ImageField(upload_to = 'food_images/', null=True, blank=True)  # images will be uploaded to media/food_images/ folder
+    image = models.ImageField(upload_to = 'food_images/')  # images will be uploaded to media/food_images/ folder
     item_quantity = models.CharField(max_length=50)
     is_available = models.BooleanField(default=True)
 

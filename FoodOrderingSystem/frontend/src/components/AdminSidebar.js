@@ -38,7 +38,7 @@ const AdminSidebar = () => {
 
             {openMenus.category && (
             <div className ='ps-4'>
-                <Link className = 'list-group-item list-group-item-action bg-dark text-white '><FaSearch className = 'me-2 icon-fix'/>Food Category</Link>
+                <Link to ='/add-category' className = 'list-group-item list-group-item-action bg-dark text-white '><FaSearch className = 'me-2 icon-fix'/>Add Category</Link>
 
                 <Link className = 'list-group-item list-group-item-action bg-dark text-white '><FaSearch className = 'me-2 icon-fix'/>Manage Category</Link>
             </div>

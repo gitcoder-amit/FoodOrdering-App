@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AdminLogin from './pages/AdminLogin';
 import Home from './pages/Home';
 import AdminDashboard from './pages/AdminDashboard';
+import AddCategory from './pages/addCategory'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path = "/" element = {<Home/>}></Route>
         <Route path = "/admin-login" element = {<AdminLogin/>}></Route>
         <Route path = "/admin-dashboard" element = {<AdminDashboard/>}></Route>
+        <Route path = '/add-category' element = {<AddCategory/>}></Route>
       </Routes>
     </Router>
   );
