@@ -81,7 +81,7 @@ const AddFood = () => {
                 <div className = 'col-md-8'>
                     <div className = 'p-4 shadow-sm rounded'>
                         <h4  className = 'mb-4'>
-                            <i className = 'fa fa-plus-circle text-primary me-2'></i> Add Food
+                            <i className = 'fa fa-plus-circle text-primary me-2'></i> Add Food Item
                         </h4>
 
                         <form onSubmit = {handleSubmit} encType="multipart/form-data" method = "post">  
@@ -134,7 +134,7 @@ const AddFood = () => {
                     </div>
                 </div>
                 <div className = 'col-md-4 d-flex justify-content-center align-items-center'>
-                    <i className = 'fas fa-utensils' style = {{fontSize : '180px', color: '#e5e5e5'}}></i>
+                    <i className = 'fas fa-pizza-slice' style = {{fontSize : '180px', color: '#e5e5e5'}}></i>
                 </div>
                 <ToastContainer position="top-center" autoClose = {2000} />
 
