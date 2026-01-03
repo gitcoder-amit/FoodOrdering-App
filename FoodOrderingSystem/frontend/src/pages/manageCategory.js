@@ -1,18 +1,33 @@
 import React, {useState, useEffect} from 'react';
 import AdminLayout from '../components/AdminLayout';
 import { Link } from 'react-router-dom';
+import { CSVLink } from 'react-csv' 
 
 const ManageCategory = ()=>{
     const [categories, setCategories] = useState([])
+    const [allcategories, setAllCategories] = useState([])
+
 
     useEffect(() => {
         fetch('http://127.0.0.1:8000/api/categories')
         .then(res=>res.json())
         .then(data => {
             setCategories(data)
+            setAllCategories(data)
         })
     }, [])  // on component update it will run automatically if we want to update on some parameter that we can pass also
     // {JSON.stringify(categories)}
+
+    const handleSearch = (s) => {
+        const keyword = s.toLowerCase();
+        if (!keyword){
+            setCategories(allcategories)
+        }
+        else{
+        const filtered = allcategories.filter((c) => c.category_name.toLowerCase().includes(keyword))
+        setCategories(filtered);
+        }
+    }
     return (
         <AdminLayout>
         <div className = 'text-center'>
@@ -22,8 +37,12 @@ const ManageCategory = ()=>{
                 <span className = 'ms-2 badge bg-success'>{categories.length}</span>
             </h5>
 
-            <div className = 'mb-3'>
-                <input type = 'text' className = 'form-control w-50' placeholder = 'Search by Category name...'></input>
+            <div className = 'mb-3 d-flex justify-content-between'>
+                <input type = 'text' className = 'form-control w-50' placeholder = 'Search by Category name...' onChange={(e) => handleSearch(e.target.value)}></input>
+
+                <CSVLink data = {categories} className = 'btn btn-success' filename = {"category_list.csv"}>
+                   <i className = 'fas fa-file-csv me-2'></i> Export to CSV
+                </CSVLink>
             </div>
            
             <table className = 'table table-bordered table-hover table-striped'>
@@ -37,7 +56,7 @@ const ManageCategory = ()=>{
                 </thead>
                 <tbody>
                     {categories.map((cat, index) => 
-                    <tr>
+                    <tr key={cat.id}>
                         <td>{index+1}</td>
                         <td>{cat.category_name}</td>
                         <td>{new Date(cat.creation_at).toLocaleString()}</td>
