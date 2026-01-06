@@ -26,7 +26,7 @@ const AdminLayout = ({children}) => {
 
     return (
 
-       <div className = 'd-flex vh-100 w-250'> 
+       <div className = 'd-flex vh-100'> 
             { sidebarOpen && <AdminSidebar/> }
             <div className = 'flex-grow-1 d-flex flex-column'>
                 <AdminHeader toggleSidebar={toggleSidebar} sidebarOpen = {sidebarOpen}/>
