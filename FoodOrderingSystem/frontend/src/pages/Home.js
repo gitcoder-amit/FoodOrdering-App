@@ -13,7 +13,7 @@ const Home = () => {
                     <h1 className='display-4'>Quick & Hot Food, Delievered to you</h1>
                     <p className='lead'>Craving something tasty?, Let's get it to your door!</p>
                     <form method='GET' action='/search' className='d-flex' style={{maxWidth:'600px', margin:'0 auto'}}>
-                        <input type='text' name='q' placeholder='I would like to eat' className='form-control' style={{borderTopRightRadius:0, borderBottomRightRadius:0}}/>
+                        <input type='text' name='q' placeholder='I would like to eat...' className='form-control' style={{borderTopRightRadius:0, borderBottomRightRadius:0}}/>
                         <button style = {{borderTopLeftRadius:0, borderBottomLeftRadius:0}} className='btn btn-warning px-4'>Search</button>
                     </form>
                 </div>

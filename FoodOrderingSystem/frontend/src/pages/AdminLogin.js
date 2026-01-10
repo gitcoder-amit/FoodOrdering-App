@@ -4,6 +4,7 @@ import { Form } from "react-router-dom";
 import '../styles/admin.css'
 import { toast, ToastContainer, toastContainter } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import PublicLayout from "../components/PublicLayout";
 
 const AdminLogin = () => {
     const [username, setUsername] = useState('')
@@ -39,6 +40,7 @@ const AdminLogin = () => {
     }
 
     return (
+        <PublicLayout>
         <div className = 'd-flex justify-content-center align-items-center vh-100' style = {{backgroundImage: "url('/images/admin-bg.jpeg')", backgroundSize:'cover'}}>
             <div className = "card shadow-lg p-4" style = {{maxWidth:'400px',width:'100%'}}>
                 <h4 className = 'text-center mb-4'>
@@ -60,6 +62,7 @@ const AdminLogin = () => {
             </div>
             <ToastContainer position="top-right" autoClose = {2000} />
         </div>
+        </PublicLayout>
     )
 }
 

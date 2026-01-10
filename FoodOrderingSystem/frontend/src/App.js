@@ -8,6 +8,7 @@ import AddCategory from './pages/addCategory'
 import ManageCategory from './pages/manageCategory'
 import AddFood from './pages/addFood';
 import ManageFood from './pages/manageFood';
+import SearchPage from './pages/searchPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path = '/manage-category' element = {<ManageCategory/>}></Route>
         <Route path = '/add-food' element = {<AddFood/>}></Route>
         <Route path = '/manage-food' element = {<ManageFood/>}></Route>
+        <Route path = '/search' element = {<SearchPage/>}></Route>
       </Routes>
     </Router>
   );
