@@ -37,9 +37,16 @@ const SearchPage = () => {
                                         <p className='card-text text-muted'>{food.item_description?.slice(0, 50)}...</p>
                                         <div className='d-flex justify-content-between align-items-center'>
                                             <span className='fw-bold'>₹ {food.item_price}</span>
+                                            {food.is_available? (
                                             <Link to='' className='btn btn-outline-primary btn-sm'>
                                                 <i className='fas fa-shopping-basket me-1'></i>Order Now
-                                            </Link>
+                                            </Link>) : (<div>
+                                                <button  className='btn btn-outline-secondary btn-sm' title="this food item is not available right now, Please try again later">
+                                                    <i className='fas fa-times-circle me-1'></i>Currently Unavailable
+                                                </button>
+                                            </div>
+                                            )
+                                            }
                                         </div>
                                     </div>
                                 </div>
