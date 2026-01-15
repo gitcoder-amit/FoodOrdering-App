@@ -31,52 +31,55 @@ const Register = () => {
         
         const handleSubmit = async (e) => {
                 e.preventDefault();
-    
-                const data = new FormData()
-                data.append("first_name", formData.first_name);
-                data.append("last_name", formData.last_name);
-                data.append("mobile", formData.mobile);
-                data.append("email", formData.email);
-                data.append("password", formData.password);
-                data.append("repeatpassword", formData.password);
-    
-                try{
-                const response = await fetch('http://127.0.0.1:8000/api/add-food-item/', {
-                    method: 'POST',
-                    body: data     
-                });
-        
-                const result = await response.json();
-        
-                if (response.status == 201){
-                    toast.success(result.message);
-                    setFormData({
-                        category :   '',
-                        item_price : '',
-                        item_name : '',
-                        item_description : '',
-                        image : null,
-                        item_quantity : ''
-                    })
-                }
-                else{
-                    toast.error(result.message);
-                }
-                }
-                catch(error){
-                    console.error("Error adding category:", error);
-                    toast.error("ERROR adding category. Please try again.");
-                }
-        
+
+                const {first_name, last_name, mobile, email, password, repeatpassword} = formData
+                    if(password != repeatpassword){ 
+                        toast.error('Password and Confirm Password dont match');
+                        return
+                    }
+                        try{
+                        const response = await fetch('http://127.0.0.1:8000/api/register/', {
+                            method: 'POST',
+                            headers:{
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                first_name, last_name, mobile, email, password
+                            })
+                        });
+                
+                        const result = await response.json();
+                
+                        if (response.status == 201){
+                            toast.success(result.message || 'You have succesfully registered');
+                            setFormData({
+                                first_name :   '',
+                                last_name : '',
+                                mobile : '',
+                                email : '',
+                                password : '',
+                                repeatpassword: ''
+                            })
+                        }
+                        else{
+                            toast.error(result.message || 'something went wrong');
+                        }
+                        }
+                        catch(error){
+                            console.error("Error adding category:", error);
+                            toast.error("ERROR adding category. Please try again.");
+                        }
+                
             }
     return (
         <PublicLayout>
+            <ToastContainer position="top-center" autoClose = {2000} />
             <div className="container py-2">
                 <div className="row shadow-lg rounded-4">
                     <div className="col-md-6 p-4">
                         <h2 className="text-center mb-4">
                             <i className="fas fa-user-plus me-2"></i>User Registration</h2>
-                        <form>
+                        <form onSubmit={handleSubmit}>
                             <div className = "mb-3">
                                 <input  name ='first_name' className = 'form-control' value={formData.first_name}  placeholder = 'First Name' onChange={handleChange} />
                             </div>
