@@ -10,6 +10,7 @@ import AddFood from './pages/addFood';
 import ManageFood from './pages/manageFood';
 import SearchPage from './pages/searchPage';
 import Register from './pages/Register';
+import Login from './pages/login';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path = '/manage-food' element = {<ManageFood/>}></Route>
         <Route path = '/search' element = {<SearchPage/>}></Route>
         <Route path = '/register' element = {<Register/>}></Route>
+        <Route path = '/login' element = {<Login/>}></Route>
       </Routes>
     </Router>
   );

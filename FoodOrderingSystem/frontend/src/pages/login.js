@@ -5,14 +5,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
 
 
-const Register = () => {
+const Login = () => {
         const [formData, setFormData] = useState({
-            first_name :   '',
-            last_name : '',
-            mobile : '',
-            email : '',
+            emailcontact: '',
             password : '',
-            repeatpassword: ''
             })
 
         const navigate = useNavigate()
@@ -32,37 +28,32 @@ const Register = () => {
         const handleSubmit = async (e) => {
                 e.preventDefault();
 
-                const {first_name, last_name, mobile, email, password, repeatpassword} = formData
-                    if(password != repeatpassword){ 
-                        toast.error('Password and Confirm Password dont match');
-                        return
-                    }
+                const {emailcontact, password} = formData
                         try{
-                        const response = await fetch('http://127.0.0.1:8000/api/register/', {
+                        const response = await fetch('http://127.0.0.1:8000/api/login/', {
                             method: 'POST',
                             headers:{
                                 'Content-Type': 'application/json'
                             },
                             body: JSON.stringify({
-                                first_name, last_name, mobile, email, password
+                                emailcontact, password
                             })
                         });
                 
                         const result = await response.json();
                 
-                        if (response.status == 201){
-                            toast.success(result.message || 'You have succesfully registered');
+                        if (response.status == 200){
+                            toast.success(result.message || 'Login Successful');
+                            localStorage.setItem('userId', result.userId)
+                            localStorage.setItem('userName', result.userName)
                             setFormData({
-                                first_name :   '',
-                                last_name : '',
-                                mobile : '',
-                                email : '',
+                                emailcontact : '',
                                 password : '',
-                                repeatpassword: ''
                             })
                             setTimeout(()=>{
-                                navigate('/login')
+                                navigate('/')
                             }, 2000)
+                            
                         }
                         else{
                             toast.error(result.message || 'something went wrong');
@@ -78,43 +69,32 @@ const Register = () => {
         <PublicLayout>
             <ToastContainer position="top-center" autoClose = {2000} />
             <div className="container py-2">
-                <div className="row shadow-lg rounded-4">
+                <div className="row align-items-center">
                     <div className="col-md-6 p-4">
                         <h2 className="text-center mb-4">
-                            <i className="fas fa-user-plus me-2"></i>User Registration</h2>
-                        <form onSubmit={handleSubmit}>
+                            <i className="fas fa-user-plus me-2"></i>User Login</h2>
+                        <form className="card p-4 shadow" onSubmit={handleSubmit}>
                             <div className = "mb-3">
-                                <input  name ='first_name' className = 'form-control' value={formData.first_name}  placeholder = 'First Name' onChange={handleChange} />
+                                <input  name ='emailcontact' className = 'form-control' value={formData.email}  placeholder = 'Email' onChange={handleChange}/>
                             </div>
 
-                            <div className = "mb-3">
-                                <input  name ='last_name' className = 'form-control' value={formData.last_name} placeholder = 'Last Name' onChange={handleChange} />
-                            </div>
-
-                            <div className = "mb-3">
-                                <input  name ='email' className = 'form-control' value={formData.email}  placeholder = 'Email' onChange={handleChange}/>
-                            </div>
-
-                            <div className = "mb-3">
-                                <input  name ='mobile' className = 'form-control' value={formData.mobile}  placeholder = 'Mobile Number' onChange={handleChange}/>
-                            </div>
 
                             <div className = "mb-3">
                                 <input  name ='password' className = 'form-control' value={formData.password} placeholder = 'Password' onChange={handleChange}/>
                             </div>
 
-                            <div className = "mb-3">
-                                <input  name ='repeatpassword' className = 'form-control' value={formData.repeatpassword}  placeholder = 'Repeat Password' onChange={handleChange}/>
+                            <div className="d-flex justify-content-between">
+                                <button className='btn btn-primary'><i className="fas fa-user-check me-2"></i>Login</button>
+                                <button className='btn btn-outline-secondary' onClick={()=>navigate('/register')}><i className="fas fa-user-check me-2"></i>Register</button>
                             </div>
 
-                            <button className='btn btn-primary w-100'><i className="fas fa-user-check me-2"></i>Submit</button>
                         </form>
                     </div>
 
                 <div className="col-md-6 d-flex align-items-center justify-content-center">
                     <div className="p-4 text-center">
-                        <img src='images/admin-bg.jpeg' className="img-fluid"/>
-                        <h5 className="mt-3">Register is fast, secure and free</h5>
+                        <img src='images/admin-bg.jpeg' className="img-fluid rounded-3"/>
+                        <h5 className="mt-3">Login is fast, secure and free</h5>
                         <p className="text-muted small">Join our food family and enjoy delicious food delievered to your door!</p>
                     </div>
                 </div>
@@ -124,4 +104,4 @@ const Register = () => {
     )
 }
 
-export default Register
+export default Login
