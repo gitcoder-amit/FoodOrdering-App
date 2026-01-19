@@ -79,8 +79,23 @@ def register_user(request):
     password = request.data.get('password')
 
     if User.objects.filter(email = email).exists() or User.objects.filter(mobile = mobile).exists():
-        return Response({"message": "Email or Mobile already registered"}, status = 400)
+        return Response({"message": "Email or Mobile already registered"}, status = 200)
     User.objects.create(first_name=first_name, last_name=last_name, email=email, mobile = mobile, 
                         password=make_password(password))
     return Response({'message': 'User registered successfully'}, status = 201)
+
+from django.contrib.auth.hashers import check_password
+from django.db.models import Q  # Q is used if we want to give more than 1 condition
+@api_view(['POST'])
+def login_user(request):
+    identifier = request.data.get('emailcontact')
+    password = request.data.get('password')
+    try:
+        user =  User.objects.get(Q(email=identifier) |Q(mobile=identifier))
+        if check_password(password, user.password):
+            return Response({"message": "Login Successfully", "userId":user.id, "userName":f"{user.first_name} {user.last_name}"}, status = 200)
+        else:
+            return Response({'message': 'Invalid Credentials'}, status = 401) 
+    except:
+        return Response({'message': 'Invalid Credentials'}, status = 401) 
     
